@@ -36,7 +36,7 @@ function getMainInfo() {
 
         });
 }
-const test = result;
+
 //проверяем условия
 function gener(el) {
     let generatedValue;
@@ -82,7 +82,7 @@ const funcRandom = () => {
         const logic733 = () => {
             alls.forEach(function (elem, index) {
                 if (arr733D[index] == -348201.3876) {
-                    arr733D[index] = 'Н/Д'
+                    arr733D[index] = '-'
                     elem.textContent = arr733D[index];
                 }
                 else {
@@ -92,7 +92,7 @@ const funcRandom = () => {
             })
             allsT.forEach(function (elem, index) {
                 if (arr733T[index] == -348201.3876) {
-                    arr733T[index] = 'Н/Д'
+                    arr733T[index] = '-'
                     elem.textContent = arr733T[index];;
                 }
                 else {
@@ -331,10 +331,23 @@ function getNowtime1() {
 function go() {
     arrTime.push(getNowtime1());
     arr733D.forEach((el, index) => {
-        arrAll1[index].push(parseFloat(el.toFixed(0)));
+        if (arr733D[index] == -348201.3876) {
+            arr733D[index] = '-'
+            arrAll1[index].push(el);
+        }
+        else {
+            arrAll1[index].push(parseFloat(el));
+        }
     })
     arr733T.forEach((el, index) => {
-        arrAll2[index].push(el.toFixed(0));
+        if (arr733T[index] == -348201.3876) {
+            arr733T[index] = '-'
+            arrAll2[index].push(el);
+        }
+        else {
+            arrAll2[index].push(parseFloat(el));
+        }
+
     })
     return arrAll1, arrAll2
 }
