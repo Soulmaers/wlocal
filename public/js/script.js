@@ -77,7 +77,7 @@ function gener(el) {
         generatedValue = 3;
     if (el >= 7 && el < 8 || el > 10 && el <= 11)
         generatedValue = 2;
-    if (el >= -10000000 && el < 7 || el > 11 && el <= 1000000)
+    if (el >= -100 && el < 7 || el > 11 && el <= 1000000)
         generatedValue = 1;
     return generatedValue;
 };
@@ -87,7 +87,7 @@ function generT(el) {
         generatedValue = 3;
     if (el >= 15 && el < 20 || el > 30 && el <= 32)
         generatedValue = 2;
-    if (el >= -10000000 && el < 15 || el > 32 && el <= 1000000)
+    if (el >= -100 && el < 15 || el > 32 && el <= 1000000)
         generatedValue = 1;
     return generatedValue;
 };
