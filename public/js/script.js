@@ -1,8 +1,21 @@
 
 
+function foo() {
+    var httpRequest = new XMLHttpRequest();
+
+    httpRequest.open('POST', 'https://hst-api.wialon.com/wialon/ajax.html?svc=token/login&params={%22token%22:%220f481b03d94e32db858c7bf2d84152041F49949D880D9189DE1A3C3E3E554FA5D7F4B74C%22}');
+
+    httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    httpRequest.send();
+    return console.log(httpRequest.responseText);
+}
+foo()
+
+
+
+/*
 // wialon api запросы
 $(document).ready(function () {
-
     wialon.core.Session.getInstance().initSession("https://hst-api.wialon.com");
     wialon.core.Session.getInstance().loginToken("0f481b03d94e32db858c7bf2d8415204289C57FB5B35C22FC84E9F4ED84D5063558E1178", "", // try to login
         function (code) {
@@ -10,9 +23,24 @@ $(document).ready(function () {
                 return;
             }
             setInterval(getMainInfo, 5000);
-            //getMainInfo()
+            //getMainInfo(onComplete)
+            ;
         });
 });
+
+/*function onComplete(a) { // When the code completes, do this
+    console.log(a)
+}
+function getFive(whenDone) {
+    var a;
+    setTimeout(function () {
+        a = 5;
+        whenDone(a);
+    }, 2000);
+}
+getFive(onComplete);*/
+
+
 
 function getMainInfo() {
     wialon.core.Session.getInstance().initSession("https://hst-api.wialon.com"); // get instance of current Session
@@ -20,6 +48,7 @@ function getMainInfo() {
         "unitId": 25343786,
         "sensors": []
     };
+
     const remote = wialon.core.Remote.getInstance();
     remote.remoteCall('unit/calc_last_message', prms1,
         function (code, result) {
@@ -30,12 +59,15 @@ function getMainInfo() {
             arr = Object.values(result);
             arrayD = arr.slice(0, 10);
             arrayT = arr.slice(10, 20);
-            funcRandom();
-            go();
-
+            funcRandom(arrayD, arrayT);
+            go(arrayD, arrayT);
+            return console.log(arrayD, arrayT)
 
         });
+
+
 }
+
 
 //проверяем условия
 function gener(el) {
@@ -67,11 +99,11 @@ const objColor = {
 const time = document.querySelectorAll('.time');
 const stat = document.querySelectorAll('.bg_stat');
 
-const funcRandom = () => {
+const funcRandom = (el1, el2) => {
     // arrD = Array(2).fill(0).map(math);
     //arrT = Array(10).fill(0).map(math);
-    arr733D = arrayD;
-    arr733T = arrayT;
+    arr733D = el1;
+    arr733T = el2;
 
     //кладем значения в каждое колесо
     //Объект 5
@@ -124,7 +156,9 @@ const funcRandom = () => {
         }
     }
     Obj733();
+
 }
+
 //текущее время
 function getNowtime() {
     let now = new Date();
@@ -164,6 +198,7 @@ const date07 = randomDate(new Date(2010, 0, 1), new Date()); const date08 = rand
 const date09 = randomDate(new Date(2010, 0, 1), new Date()); const date10 = randomDate(new Date(2010, 0, 1), new Date());
 
 const arrDates = [date01, date02, date03, date04, date05, date06, date07, date08, date09, date10];
+
 function dataVunc() {
     arData = [];
     arrDates.forEach((elem) => {
@@ -328,20 +363,20 @@ function getNowtime1() {
     return nowTime;
 }
 //кладем в пустые массивы значения каждого колеса
-function go() {
+function go(item1, item2) {
     arrTime.push(getNowtime1());
-    arr733D.forEach((el, index) => {
-        if (arr733D[index] == -348201.3876) {
-            arr733D[index] = '-'
+    item1.forEach((el, index) => {
+        if (item1[index] == -348201.3876) {
+            item1[index] = '-'
             arrAll1[index].push(el);
         }
         else {
-            arrAll1[index].push(parseFloat(el));
+            arrAll1[index].push(parseFloat(el.toFixed(0)));
         }
     })
-    arr733T.forEach((el, index) => {
-        if (arr733T[index] == -348201.3876) {
-            arr733T[index] = '-'
+    item2.forEach((el, index) => {
+        if (item2[index] == -348201.3876) {
+            item2[index] = '-'
             arrAll2[index].push(el);
         }
         else {
