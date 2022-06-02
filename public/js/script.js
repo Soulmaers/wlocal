@@ -1,5 +1,5 @@
 
-
+/*
 function foo() {
     var httpRequest = new XMLHttpRequest();
 
@@ -10,10 +10,10 @@ function foo() {
     return console.log(httpRequest.responseText);
 }
 foo()
+*/
 
 
 
-/*
 // wialon api запросы
 $(document).ready(function () {
     wialon.core.Session.getInstance().initSession("https://hst-api.wialon.com");
@@ -61,6 +61,7 @@ function getMainInfo() {
             arrayT = arr.slice(10, 20);
             funcRandom(arrayD, arrayT);
             go(arrayD, arrayT);
+
             return console.log(arrayD, arrayT)
 
         });
@@ -99,6 +100,12 @@ const objColor = {
 const time = document.querySelectorAll('.time');
 const stat = document.querySelectorAll('.bg_stat');
 
+
+
+//кладем в пустые массивы значения каждого колеса
+
+
+
 const funcRandom = (el1, el2) => {
     // arrD = Array(2).fill(0).map(math);
     //arrT = Array(10).fill(0).map(math);
@@ -113,9 +120,8 @@ const funcRandom = (el1, el2) => {
         time[0].textContent = getNowtime();
         const logic733 = () => {
             alls.forEach(function (elem, index) {
-                if (arr733D[index] == -348201.3876) {
-                    arr733D[index] = '-'
-                    elem.textContent = arr733D[index];
+                if (arr733D[index] === -348201.3876) {
+                    elem.textContent = '-';
                 }
                 else {
                     elem.textContent = parseFloat(arr733D[index].toFixed(1)) + '\nБар';
@@ -124,8 +130,7 @@ const funcRandom = (el1, el2) => {
             })
             allsT.forEach(function (elem, index) {
                 if (arr733T[index] == -348201.3876) {
-                    arr733T[index] = '-'
-                    elem.textContent = arr733T[index];;
+                    elem.textContent = '-';
                 }
                 else {
                     elem.textContent = arr733T[index] + '°C';
@@ -362,31 +367,17 @@ function getNowtime1() {
     let nowTime = (`${hours}:${minutes}:${seconds}`);
     return nowTime;
 }
-//кладем в пустые массивы значения каждого колеса
+
 function go(item1, item2) {
     arrTime.push(getNowtime1());
     item1.forEach((el, index) => {
-        if (item1[index] == -348201.3876) {
-            item1[index] = '-'
-            arrAll1[index].push(el);
-        }
-        else {
-            arrAll1[index].push(parseFloat(el.toFixed(0)));
-        }
+        arrAll1[index].push(parseFloat(el.toFixed(0)));
     })
     item2.forEach((el, index) => {
-        if (item2[index] == -348201.3876) {
-            item2[index] = '-'
-            arrAll2[index].push(el);
-        }
-        else {
-            arrAll2[index].push(parseFloat(el));
-        }
-
+        arrAll2[index].push(parseFloat(el.toFixed(0)));
     })
     return arrAll1, arrAll2
 }
-
 /*
 function getSensors() { // construct sensors Select list for selected unit
     if (!$("#units").val()) { msg("Select unit"); return; } // exit if no unit selected
