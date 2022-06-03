@@ -21,8 +21,8 @@ $(document).ready(function () {
             if (code) {
                 return;
             }
-            // setInterval(getMainInfo, 5000);
-            getMainInfo()
+            setInterval(getMainInfo, 5000);
+            // getMainInfo()
 
         });
 });
