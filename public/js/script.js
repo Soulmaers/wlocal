@@ -11,8 +11,6 @@ function foo() {
 }
 foo()
 */
-
-
 // wialon api запросы
 $(document).ready(function () {
     wialon.core.Session.getInstance().initSession("https://hst-api.wialon.com");
@@ -21,30 +19,9 @@ $(document).ready(function () {
             if (code) {
                 return;
             }
-            setInterval(getMainInfo, 5000);
-            // getMainInfo()
-
+            setInterval(getMainInfo, 1000);
         });
 });
-
-/*function onComplete(a) { // When the code completes, do this
-    console.log(a)
-}
-function getFive(whenDone) {
-    var a;
-    setTimeout(function () {
-        a = 5;
-        whenDone(a);
-    }, 2000);
-}
-getFive(onComplete);*/
-
-const test1 = [];
-const test2 = [];
-
-console.log(test1.length);
-
-
 
 function getMainInfo() {
     wialon.core.Session.getInstance().initSession("https://hst-api.wialon.com"); // get instance of current Session
@@ -52,7 +29,6 @@ function getMainInfo() {
         "unitId": 25343786,
         "sensors": []
     };
-
     const remote = wialon.core.Remote.getInstance();
     remote.remoteCall('unit/calc_last_message', prms1,
         function (code, result) {
@@ -62,24 +38,10 @@ function getMainInfo() {
             arr = Object.values(result);
             arrayD = arr.slice(0, 10);
             arrayT = arr.slice(10, 20);
-            arrayD.forEach((el) => {
-                test1.push(el)
-            })
-
-            arrayT.forEach((el) => {
-                test2.push(el);
-            })
-
             funcRandom(arrayD, arrayT);
             go(arrayD, arrayT);
-            //console.log(arrayD, arrayT)
-
         });
-
-
 }
-
-
 //проверяем условия
 function gener(el) {
     let generatedValue;
@@ -131,12 +93,10 @@ const funcRandom = (el1, el2) => {
         } else {
             statEr();
         }
-
     }
     Obj733();
 
 }
-
 const logic733 = (el1, el2) => {
     const alls = document.querySelectorAll('.tiresD733');
     const allsT = document.querySelectorAll('.tiresT733');
@@ -273,79 +233,82 @@ arrTireslink.forEach((elem, index) => {
         tiresGrafik(arrAll1)
         tiresGrafik(arrAll2)
         //графики
-        Chart.register(ChartDataLabels);
-
-        myChartg = new Chart(myChartg, {
-            type: 'line',
-            data: {
-                datasets: [{
-                    data: davl,
-                    label: 'Давление',
-                    fill: false,
-                    borderColor: 'lightgreen',
-                    yAxisID: 'left-y-axis'
-                }, {
-                    data: davl2,
-                    label: 'Температура',
-                    fill: false,
-                    borderColor: 'lightblue',
-                    yAxisID: 'right-y-axis'
-                }],
-                labels: arrTime
-            },
-            options: {
-                plugins: {
-                    legend: {
-                        labels: {
-                            font: {
-                                size: 20,
-                            },
-                            color: 'gray'
-                        }
-                    }
-                },
-                scales: {
-                    'left-y-axis': {
-                        type: 'linear',
-                        position: 'left',
-                        min: 0,
-                        max: 12,
-                        ticks: {
-                            font: {
-                                size: 18,
-                            }
-                        }
-                    },
-                    'right-y-axis': {
-                        type: 'linear',
-                        position: 'right',
-                        min: 0,
-                        max: 50,
-                        ticks: {
-                            font: {
-                                size: 18,
-                            }
-                        }
-                    },
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 10
-                            }
-                        }
-                    }
-                },
-            }
-        });
-
-        const upDia = () => {
-            myChartg.data.datasets[0].data = davl;
-            myChartg.data.datasets[1].data = davl2;
-            myChartg.update();
-        }
-        setInterval(upDia, 100);
+        chrt();
     }
 });
+
+function chrt() {
+    Chart.register(ChartDataLabels);
+    myChartg = new Chart(myChartg, {
+        type: 'line',
+        data: {
+            datasets: [{
+                data: davl,
+                label: 'Давление',
+                fill: false,
+                borderColor: 'lightgreen',
+                yAxisID: 'left-y-axis'
+            }, {
+                data: davl2,
+                label: 'Температура',
+                fill: false,
+                borderColor: 'lightblue',
+                yAxisID: 'right-y-axis'
+            }],
+            labels: arrTime
+        },
+        options: {
+            plugins: {
+                legend: {
+                    labels: {
+                        font: {
+                            size: 20,
+                        },
+                        color: 'gray'
+                    }
+                }
+            },
+            scales: {
+                'left-y-axis': {
+                    type: 'linear',
+                    position: 'left',
+                    min: 0,
+                    max: 12,
+                    ticks: {
+                        font: {
+                            size: 18,
+                        }
+                    }
+                },
+                'right-y-axis': {
+                    type: 'linear',
+                    position: 'right',
+                    min: 0,
+                    max: 50,
+                    ticks: {
+                        font: {
+                            size: 18,
+                        }
+                    }
+                },
+                x: {
+                    ticks: {
+                        font: {
+                            size: 10
+                        }
+                    }
+                }
+            },
+        }
+    });
+
+    const upDia = () => {
+        myChartg.data.datasets[0].data = davl;
+        myChartg.data.datasets[1].data = davl2;
+        myChartg.update();
+    }
+    setInterval(upDia, 100);
+}
 const arrAll1 = [[], [], [], [], [], [], [], [], [], []];
 const arrAll2 = [[], [], [], [], [], [], [], [], [], []];
 arrTime = [];
