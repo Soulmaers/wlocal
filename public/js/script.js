@@ -13,7 +13,6 @@ foo()
 */
 
 
-
 // wialon api запросы
 $(document).ready(function () {
     wialon.core.Session.getInstance().initSession("https://hst-api.wialon.com");
@@ -24,7 +23,7 @@ $(document).ready(function () {
             }
             setInterval(getMainInfo, 5000);
             //getMainInfo(onComplete)
-            ;
+
         });
 });
 
@@ -40,6 +39,8 @@ function getFive(whenDone) {
 }
 getFive(onComplete);*/
 
+const test1 = [];
+const test2 = [];
 
 
 function getMainInfo() {
@@ -59,10 +60,20 @@ function getMainInfo() {
             arr = Object.values(result);
             arrayD = arr.slice(0, 10);
             arrayT = arr.slice(10, 20);
+
+
+
+            arrayD.forEach((el) => {
+                test1.push(el)
+            })
+
+            arrayT.forEach((el) => {
+                test2.push(el);
+            })
+
             funcRandom(arrayD, arrayT);
             go(arrayD, arrayT);
-
-            return console.log(arrayD, arrayT)
+            console.log(arrayD, arrayT)
 
         });
 
@@ -99,71 +110,60 @@ const objColor = {
 }
 const time = document.querySelectorAll('.time');
 const stat = document.querySelectorAll('.bg_stat');
-
-
-
-//кладем в пустые массивы значения каждого колеса
-
-
-
+time[0].textContent = getNowtime();
 const funcRandom = (el1, el2) => {
-    // arrD = Array(2).fill(0).map(math);
-    //arrT = Array(10).fill(0).map(math);
-    arr733D = el1;
-    arr733T = el2;
-
+    //  arr733D = el1;
+    // arr733T = el2;
     //кладем значения в каждое колесо
     //Объект 5
     const Obj733 = () => {
-        const alls = document.querySelectorAll('.tiresD733');
-        const allsT = document.querySelectorAll('.tiresT733');
-        time[0].textContent = getNowtime();
-        const logic733 = () => {
-            alls.forEach(function (elem, index) {
-                if (arr733D[index] === -348201.3876) {
-                    elem.textContent = '-';
-                }
-                else {
-                    elem.textContent = parseFloat(arr733D[index].toFixed(1)) + '\nБар';
-                }
-
-            })
-            allsT.forEach(function (elem, index) {
-                if (arr733T[index] == -348201.3876) {
-                    elem.textContent = '-';
-                }
-                else {
-                    elem.textContent = arr733T[index] + '°C';
-                }
-
-            })
-            alls.forEach(function (elem, index) {
-                elem.style.background = objColor[gener(arr733D[index])];
-            })
-            allsT.forEach(function (elem, index) {
-                elem.style.background = objColor[generT(arr733T[index])];
-            })
-        }
-        logic733();
+        logic733(el1, el2);
         const statGal = () => {
             stat[0].style.backgroundImage = "url(image/gal.png)";
         }
         const statEr = () => {
             stat[0].style.backgroundImage = "url(image/er.png)";
         }
-        if (arr733D[0] >= 2 && arr733D[1] >= 2 && arr733D[2] >= 2 && arr733D[3] >= 2 && arr733D[4] >= 2
-            && arr733D[5] >= 2 && arr733D[6] >= 2 && arr733D[7] >= 2 && arr733D[8] >= 2 && arr733D[9] >= 2 &&
-            arr733T[0] >= 2 && arr733T[1] >= 2 && arr733T[2] >= 2 && arr733T[3] >= 2 && arr733T[4] >= 2
-            && arr733T[5] >= 2 && arr733T[6] >= 2 && arr733T[7] >= 2 && arr733T[8] >= 2 && arr733T[9] >= 2) {
+        if (el1[0] >= 2 && el1[1] >= 2 && el1[2] >= 2 && el1[3] >= 2 && el1[4] >= 2
+            && el1[5] >= 2 && el1[6] >= 2 && el1[7] >= 2 && el1[8] >= 2 && el1[9] >= 2 &&
+            el2[0] >= 2 && el2[1] >= 2 && el2[2] >= 2 && el2[3] >= 2 && el2[4] >= 2
+            && el2[5] >= 2 && el2[6] >= 2 && el2[7] >= 2 && el2[8] >= 2 && el2[9] >= 2) {
             statGal();
         } else {
             statEr();
         }
+
     }
     Obj733();
 
 }
 
+const logic733 = (el1, el2) => {
+    const alls = document.querySelectorAll('.tiresD733');
+    const allsT = document.querySelectorAll('.tiresT733');
+    alls.forEach(function (elem, index) {
+        if (el1[index] === -348201.3876) {
+            elem.textContent = '-';
+        }
+        else {
+            elem.textContent = parseFloat(el1[index].toFixed(1)) + '\nБар';
+        }
+    })
+    allsT.forEach(function (elem, index) {
+        if (el2[index] == -348201.3876 || el2[index] == -128) {
+            elem.textContent = '-';
+        }
+        else {
+            elem.textContent = el2[index] + '°C';
+        }
+    })
+    alls.forEach(function (elem, index) {
+        elem.style.background = objColor[gener(el1[index])];
+    })
+    allsT.forEach(function (elem, index) {
+        elem.style.background = objColor[generT(el2[index])];
+    })
+}
 //текущее время
 function getNowtime() {
     let now = new Date();
@@ -378,6 +378,11 @@ function go(item1, item2) {
     })
     return arrAll1, arrAll2
 }
+
+
+
+
+
 /*
 function getSensors() { // construct sensors Select list for selected unit
     if (!$("#units").val()) { msg("Select unit"); return; } // exit if no unit selected

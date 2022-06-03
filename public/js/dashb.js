@@ -1,10 +1,10 @@
-//import funcRandom from './script.js'
+
 function mathV() {
     return Math.floor(Math.random() * 10);
 }
 mathV();
 function dashDav() {
-    const arrDall = arrayD;
+    const arrDall = Array(36).fill(0).map(mathV);
     countRed = 0;
     countYellow = 0;
     countGreen = 0;
