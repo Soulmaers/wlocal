@@ -21,8 +21,8 @@ $(document).ready(function () {
             if (code) {
                 return;
             }
-            setInterval(getMainInfo, 5000);
-            //getMainInfo(onComplete)
+            // setInterval(getMainInfo, 5000);
+            getMainInfo()
 
         });
 });
@@ -42,6 +42,9 @@ getFive(onComplete);*/
 const test1 = [];
 const test2 = [];
 
+console.log(test1.length);
+
+
 
 function getMainInfo() {
     wialon.core.Session.getInstance().initSession("https://hst-api.wialon.com"); // get instance of current Session
@@ -56,13 +59,9 @@ function getMainInfo() {
             if (code) {
                 console.log(wialon.core.Errors.getErrorText(code));
             }
-
             arr = Object.values(result);
             arrayD = arr.slice(0, 10);
             arrayT = arr.slice(10, 20);
-
-
-
             arrayD.forEach((el) => {
                 test1.push(el)
             })
@@ -73,7 +72,7 @@ function getMainInfo() {
 
             funcRandom(arrayD, arrayT);
             go(arrayD, arrayT);
-            console.log(arrayD, arrayT)
+            //console.log(arrayD, arrayT)
 
         });
 
