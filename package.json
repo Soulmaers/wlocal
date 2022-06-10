@@ -1,15 +1,23 @@
 {
-  "name": "wialonproj",
+  "name": "wlocal",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Soulmaers/wlocal.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Soulmaers/wlocal/issues"
+  },
+  "homepage": "https://github.com/Soulmaers/wlocal#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "wialonjs-api": "^0.0.8"
   }
 }

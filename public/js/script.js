@@ -12,6 +12,24 @@ function foo() {
 foo()
 */
 // wialon api запросы
+
+
+var sess = new W.Session('https://hst-api.wialon.com', {
+    eventsTimeout: 5
+});
+
+// set Remote API 'svc' param
+var svc = '0f481b03d94e32db858c7bf2d84152041F49949D880D9189DE1A3C3E3E554FA5D7F4B74C';
+// set Remote API 'params' param
+var params = {
+    token: 'YOUR TOKEN'
+};
+// Execute request
+sess.execute(svc, params, function (data) {
+    // callback
+    console.log('login succeed');
+});
+
 $(document).ready(function () {
     wialon.core.Session.getInstance().initSession("https://hst-api.wialon.com");
     wialon.core.Session.getInstance().loginToken("0f481b03d94e32db858c7bf2d8415204289C57FB5B35C22FC84E9F4ED84D5063558E1178", "", // try to login
