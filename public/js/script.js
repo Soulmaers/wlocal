@@ -14,39 +14,28 @@ foo()
 // wialon api запросы
 
 
-var sess = new W.Session('https://hst-api.wialon.com', {
-    eventsTimeout: 5
-});
 
-// set Remote API 'svc' param
-var svc = '0f481b03d94e32db858c7bf2d84152041F49949D880D9189DE1A3C3E3E554FA5D7F4B74C';
-// set Remote API 'params' param
-var params = {
-    token: 'YOUR TOKEN'
-};
-// Execute request
-sess.execute(svc, params, function (data) {
-    // callback
-    console.log('login succeed');
-});
 
-$(document).ready(function () {
+
+function init() {
     wialon.core.Session.getInstance().initSession("https://hst-api.wialon.com");
     wialon.core.Session.getInstance().loginToken("0f481b03d94e32db858c7bf2d8415204289C57FB5B35C22FC84E9F4ED84D5063558E1178", "", // try to login
         function (code) {
             if (code) {
                 return;
             }
-            setInterval(getMainInfo, 1000);
+            setInterval(getMainInfo, 200);
         });
-});
-
+};
+init();
 function getMainInfo() {
     wialon.core.Session.getInstance().initSession("https://hst-api.wialon.com"); // get instance of current Session
     var prms1 = {
         "unitId": 25343786,
         "sensors": []
     };
+
+
     const remote = wialon.core.Remote.getInstance();
     remote.remoteCall('unit/calc_last_message', prms1,
         function (code, result) {
@@ -58,6 +47,7 @@ function getMainInfo() {
             arrayT = arr.slice(10, 20);
             funcRandom(arrayD, arrayT);
             go(arrayD, arrayT);
+            return window['arrayD'] = arrayD, arrayT, arr
         });
 }
 //проверяем условия
@@ -67,7 +57,7 @@ function gener(el) {
         generatedValue = 3;
     if (el >= 7 && el < 8 || el > 10 && el <= 11)
         generatedValue = 2;
-    if (el >= -100 && el < 7 || el > 11 && el <= 1000000)
+    if (el >= -1000 && el < 7 || el > 11)
         generatedValue = 1;
     return generatedValue;
 };
@@ -103,10 +93,10 @@ const funcRandom = (el1, el2) => {
         const statEr = () => {
             stat[0].style.backgroundImage = "url(image/er.png)";
         }
-        if (el1[0] >= 2 && el1[1] >= 2 && el1[2] >= 2 && el1[3] >= 2 && el1[4] >= 2
-            && el1[5] >= 2 && el1[6] >= 2 && el1[7] >= 2 && el1[8] >= 2 && el1[9] >= 2 &&
-            el2[0] >= 2 && el2[1] >= 2 && el2[2] >= 2 && el2[3] >= 2 && el2[4] >= 2
-            && el2[5] >= 2 && el2[6] >= 2 && el2[7] >= 2 && el2[8] >= 2 && el2[9] >= 2) {
+        if (el1[0] >= 8 && el1[0] <= 10 && el1[1] >= 8 && el1[1] <= 10 && el1[2] >= 8 && el1[2] <= 10 && el1[3] >= 8 && el1[3] <= 10 && el1[4] >= 8
+            && el1[4] <= 10 && el1[5] >= 8 && el1[5] <= 10 && el1[6] >= 8 && el1[6] <= 10 && el1[7] >= 8 && el1[7] <= 10 && el1[8] >= 8 && el1[8] <= 10 && el1[9] >= 8 && el1[9] <= 10 &&
+            el2[0] >= 20 && el2[0] <= 30 && el2[1] >= 20 && el2[1] <= 30 && el2[2] >= 20 && el2[2] <= 30 && el2[3] >= 20 && el2[3] <= 30 && el2[4] >= 20
+            && el2[4] <= 30 && el2[5] >= 20 && el2[5] <= 30 && el2[6] >= 20 && el2[6] <= 30 && el2[7] >= 20 && el2[7] <= 30 && el2[8] >= 20 && el2[8] <= 30 && el2[9] >= 20 && el2[9] <= 30) {
             statGal();
         } else {
             statEr();

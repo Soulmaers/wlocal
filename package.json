@@ -18,6 +18,8 @@
   "homepage": "https://github.com/Soulmaers/wlocal#readme",
   "dependencies": {
     "express": "^4.18.1",
+    "node-wialon": "^1.16.2",
+    "wialon": "^2.0.2",
     "wialonjs-api": "^0.0.8"
   }
 }
