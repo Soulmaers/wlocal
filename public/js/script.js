@@ -13,8 +13,9 @@ foo()
 */
 // wialon api запросы
 
-
-
+//localStorage.getItem('name');
+//console.log(localStorage.getItem('name'));
+//console.log(localStorage.getItem('name'));
 
 
 function init() {
@@ -24,7 +25,7 @@ function init() {
             if (code) {
                 return;
             }
-            setInterval(getMainInfo, 200);
+            setInterval(getMainInfo, 2000);
         });
 };
 init();
@@ -111,10 +112,17 @@ const logic733 = (el1, el2) => {
     alls.forEach(function (elem, index) {
         if (el1[index] === -348201.3876) {
             elem.textContent = '-';
+            // localStorage.setItem('name', elem.textContent)
+            // localStorage.getItem('name');
+            // console.log(localStorage.getItem('name'));
         }
         else {
             elem.textContent = parseFloat(el1[index].toFixed(1)) + '\nБар';
+            // localStorage.setItem('name', elem.textContent);
+            // localStorage.getItem('name');
+            //console.log(localStorage.getItem('name'));
         }
+        ;
     })
     allsT.forEach(function (elem, index) {
         if (el2[index] == -348201.3876 || el2[index] == -128) {
