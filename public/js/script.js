@@ -32,10 +32,9 @@ init();
 function getMainInfo() {
     wialon.core.Session.getInstance().initSession("https://hst-api.wialon.com"); // get instance of current Session
     var prms1 = {
-        "unitId": 25343786,
+        "unitId": 25343786, //25594204
         "sensors": []
     };
-
 
     const remote = wialon.core.Remote.getInstance();
     remote.remoteCall('unit/calc_last_message', prms1,
@@ -50,7 +49,39 @@ function getMainInfo() {
             go(arrayD, arrayT);
             return window['arrayD'] = arrayD, arrayT, arr
         });
+    /*
+        var flags = 1 + 8 + 1024 + 256
+        var prms = {
+            "spec": {
+                "itemsType": "avl_unit",
+                "propName": "sys_name",
+                "propValueMask": "*",
+                "sortType": "sys_name"
+            },
+            "force": 1,
+            "flags": flags,
+            "from": 0,
+            "to": 0
+        };
+    
+    
+        const remote1 = wialon.core.Remote.getInstance();
+        remote1.remoteCall('core/search_items', prms,
+            function (code, result) {
+                if (code) {
+                    console.log(wialon.core.Errors.getErrorText(code));
+                }
+                arr1 = Object.values(result);
+                arrayD1 = arr.slice(0, 10);
+                arrayT1 = arr.slice(10, 20);
+                // funcRandom(arrayD, arrayT);
+                // go(arrayD, arrayT);
+                return window['arrayD'] = arrayD1, arrayT1, arr1
+            });
+            */
 }
+
+
 //проверяем условия
 function gener(el) {
     let generatedValue;
