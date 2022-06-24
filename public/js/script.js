@@ -25,6 +25,7 @@ function init() {
             if (code) {
                 return;
             }
+            getMainInfo();
             setInterval(getMainInfo, 2000);
         });
 };
@@ -43,8 +44,9 @@ function getMainInfo() {
                 console.log(wialon.core.Errors.getErrorText(code));
             }
             arr = Object.values(result);
-            arrayD = arr.slice(0, 10);
-            arrayT = arr.slice(10, 20);
+            arrAll = arr.slice(0, 20);
+            arrayD = arrAll.slice(0, 10);
+            arrayT = arrAll.slice(10, 20);
             funcRandom(arrayD, arrayT);
             go(arrayD, arrayT);
             return window['arrayD'] = arrayD, arrayT, arr
@@ -388,32 +390,136 @@ function go(item1, item2) {
     return arrAll1, arrAll2
 }
 
-
-
-
-
-/*
-function getSensors() { // construct sensors Select list for selected unit
-    if (!$("#units").val()) { msg("Select unit"); return; } // exit if no unit selected
-    $("#sensors").html("<option></option>"); // add first empty element
-    var sess = wialon.core.Session.getInstance(); // get instance of current Session
-    var unit = sess.getItem($("#units").val()); // get unit by id
-    var sens = unit.getSensors(); // get unit's sensors
-    for (var i in sens) // construct select list
-        $("#sensors").append("<option value='" + sens[i].id + "'>" + sens[i].n + "</option>");
+const dashb = document.querySelector('.dashb')
+dashb.addEventListener('click', rend)
+function rend() {
+    const wrapDash = document.querySelector('.wrapper_right_dash')
+    const wrap = document.querySelector('.wrapper_right')
+    wrap.style.display = 'none'
+    wrapDash.style.display = 'flex'
 }
-let result;
-function getSensorInfo() { // get and show information about selected Sensor
-    if (!$("#units").val()) { msg("Select unit"); return; } // exit if no unit selected
-    if (!$("#sensors").val()) return; // exit if no unit selected
-    var sess = wialon.core.Session.getInstance(); // get instance of current Session
-    var unit = sess.getItem($("#units").val()); // get unit by id
-    var sens = unit.getSensors($("#sensors").val()); // get sensor by id
-    // calculate sensor value
-    let result = unit.calculateSensorValue(sens, unit.getLastMessage());
-    if (result == -348201.3876) result = "N/A"; // compare result with invalid sensor value constant
-    // print result message
-    console.log(sens);
-    console.log(result);
-    msg(result);
-}*/
+
+
+function dashDav() {
+    const arrDall = arrayD;
+    countRed = 0;
+    countYellow = 0;
+    countGreen = 0;
+    arrDall.forEach((el) => {
+        if (el >= 8 && el <= 10) {
+            countGreen++
+        }
+        if (el >= 7 && el < 8 || el > 10 && el <= 11) {
+            countYellow++
+        }
+        if (el >= -1000 && el < 7 || el > 11 || el === -348201.3876) {
+            countRed++
+        }
+    })
+    resultRed = Math.round(countRed / arrDall.length * 100);
+    resultYellow = Math.round(countYellow / arrDall.length * 100);
+    resultGreen = Math.round(countGreen / arrDall.length * 100);
+    return arrDash = [resultRed, resultYellow, resultGreen];
+}
+
+
+Chart.register(ChartDataLabels);
+const ctx = document.getElementById('myChart').getContext('2d');
+chart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: [
+            'Большое отклонение',
+            'Незначительные отклонения',
+            'В Норме'
+        ],
+        datasets: [{
+            label: 'Дашбоард',
+            data: setInterval(dashDav, 2000),
+            backgroundColor: [
+                '#e03636',
+                '#9ba805',
+                '#3eb051'
+            ],
+            hoverOffset: 4
+        }]
+    },
+    options: {
+        plugins: {
+            datalabels: {
+                color: '#423737',
+                textAlign: 'center',
+                font: {
+                    size: 20,
+                    lineHeight: 1.6
+                },
+                formatter: function (value) {
+                    return value + '%';
+                }
+            }
+        }
+    }
+});
+
+function dashDat() {
+    const arrDall = arrAll;
+    countJob = 0;
+    countError = 0;
+    arrDall.forEach((el) => {
+        if (el < -100) {
+            countError++
+        }
+        if (el > -30 && el < 50) {
+            countJob++
+        }
+    })
+    resultJob = Math.round(countJob / arrDall.length * 100);
+    resultError = Math.round(countError / arrDall.length * 100);
+    return arrDashdat = [resultError, resultJob];
+}
+
+const ctx2 = document.getElementById('myChart2').getContext('2d');
+const chart2 = new Chart(ctx2, {
+    type: 'doughnut',
+    data: {
+        labels: [
+            'Нет данных от датчиков',
+            'Работающие датчики'
+        ],
+        datasets: [{
+            label: 'My First Dataset',
+            data: setInterval(dashDat, 2000),
+            backgroundColor: [
+                'gray',
+                '#3eb051'
+            ],
+            hoverOffset: 4
+        }]
+    },
+    options: {
+        plugins: {
+            datalabels: {
+                color: '#423737',
+                textAlign: 'center',
+                font: {
+                    size: 20,
+                    lineHeight: 1.6
+                },
+                formatter: function (value) {
+                    return value + '%';
+                }
+            }
+        }
+    }
+});
+
+const upRender = () => {
+    chart.data.datasets[0].data = arrDash;
+    chart2.data.datasets[0].data = arrDashdat;
+    chart.update();
+    chart2.update();
+}
+
+setInterval(upRender, 2000);
+
+

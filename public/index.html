@@ -14,14 +14,13 @@
 </head>
 
 <body>
-
     <header class="header">
         <div class="menu">
             <ul class="list_menu">
                 <li class="list_item_menu"><a class="link_menu" href="index.html">Мониторинг</a>
                 <li class="list_item_menu"><a class="link_menu" href="ver01.html">Аналитика</a>
                 <li class="list_item_menu"><a class="link_menu" href="dash.html">Дашбоард</a>
-                <li class="list_item_menu"><a class="link_menu" href="dashb.html">Дашбоард.Мониторинг</a>
+                <li class="list_item_menu"><a class="link_menu dashb" href="#">Дашбоард.Мониторинг</a>
             </ul>
         </div>
     </header>
@@ -69,6 +68,28 @@
             </table>
 
         </div>
+
+
+        <div class="wrapper_right_dash">
+            <div class="dash_card">
+                <h2 class="dash_title">
+                    Соотношение отклонений по давлению
+                </h2>
+                <div class="dash_board">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+            <div class="dash_card">
+                <h2 class="dash_title">
+
+                </h2>
+                <div class="dash_board">
+                    <canvas id="myChart2"></canvas>
+                </div>
+            </div>
+        </div>
+
+
         <div class="wrapper_right">
             <div class="dataActive">
                 <div class="value_tires">
@@ -197,6 +218,7 @@
 
     <script src="https://hst-api.wialon.com/wsdk/script/wialon.js"></script>
     <script src="js/script.js"></script>
+
 
 
 </body>
