@@ -84,6 +84,11 @@ function getMainInfo() {
 }
 
 
+
+const arrTest1 = [[1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6]]
+
+arrTest1.map((arr) => { arr.splice(2, 1); });
+console.log(arrTest1);
 //проверяем условия
 function gener(el) {
     let generatedValue;
